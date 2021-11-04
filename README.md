@@ -50,6 +50,11 @@ sudo make install
 ```
 
 ### Try an example
+Available examples:
+  * ReadUidMultiReader - Example program showing how to read data from more than one PICC to serial.
+  * ReadNUID - Example program showing how to read new NUID from a PICC to serial (only if a new card is present).
+  * IsCardPresent - Example program showing how to check if a card is present.
+
 1. Download this repo by running ```git clone https://github.com/CoolCyberBrain/RPi-MFRC522.git```
 2. Enter the folder by running ```cd RPi-MFRC522```
 3. Build the ReadNUID example by running the following command

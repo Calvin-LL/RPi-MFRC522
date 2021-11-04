@@ -1918,3 +1918,23 @@ bool MFRC522::PICC_ReadCardSerial() {
 	MFRC522::StatusCode result = PICC_Select(&uid);
 	return (result == STATUS_OK);
 } // End 
+
+/**
+ * Returns true if a PICC responds to PICC_CMD_REQA.
+ * All cards are invited (-> cards in state IDLE _and_ HALT).
+ * 
+ * @return bool
+ */
+bool MFRC522::PICC_IsCardPresent() {
+	byte bufferATQA[2];
+	byte bufferSize = sizeof(bufferATQA);
+
+    // Reset baud rates
+	PCD_WriteRegister(TxModeReg, 0x00);
+	PCD_WriteRegister(RxModeReg, 0x00);
+	// Reset ModWidthReg
+	PCD_WriteRegister(ModWidthReg, 0x26);
+
+	MFRC522::StatusCode result = PICC_WakeupA(bufferATQA, &bufferSize); // check cards in state HALT/IDLE
+	return (result == STATUS_OK || result == STATUS_COLLISION);
+} 
